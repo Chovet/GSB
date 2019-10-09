@@ -17,7 +17,7 @@
 
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
-      	private static $bdd='dbname=newdb';   		
+      	private static $bdd='dbname=GSB';   		
       	private static $user='admin' ;    		
       	private static $mdp='admin' ;	
 		private static $monPdo;
@@ -229,10 +229,10 @@ class PdoGsb{
  * @param $date : la date du frais au format français jj//mm/aaaa
  * @param $montant : le montant
 */
-	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant,$paiement){
+	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant,$idpaiement){
 		$dateFr = dateFrancaisVersAnglais($date);
-		$req = "insert into LigneFraisHorsForfait (idVisiteur, mois, libelle, date, montant, paiement)
-		values('$idVisiteur','$mois','$libelle','$dateFr','$montant','$paiement')";
+		$req = "insert into LigneFraisHorsForfait (idVisiteur, mois, libelle, date, montant, idpaiement)
+		values('$idVisiteur','$mois','$libelle','$dateFr','$montant','$idpaiement')";
 		PdoGsb::$monPdo->exec($req);
 	}
 /**
@@ -297,5 +297,12 @@ class PdoGsb{
 		where FicheFrais.idVisiteur ='$idVisiteur' and FicheFrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
 	}
+
+	public function modePaiement(){
+		$req = "select id as idPaiement, modePaiement as modePaiement from  ModeDePaiement";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	 } 
 }
 ?>
