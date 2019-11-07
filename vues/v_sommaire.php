@@ -1,4 +1,8 @@
-﻿    <!-- Division pour le sommaire -->
+﻿<?php
+  $action = $_REQUEST['action'];
+  $idVisiteur = $_SESSION['idVisiteur'];
+?>   
+    <!-- Division pour le sommaire -->
     <div id="menuGauche">
      <div id="infosUtil">
     
@@ -15,6 +19,14 @@
       <a class="nav-item nav-link active" href="#">Visiteur : <?php echo $_SESSION['prenom']."  ".$_SESSION['nom']  ?> <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="index.php?uc=gererFrais&action=saisirFrais">Saisie fiche de frais</a>
       <a class="nav-item nav-link" href="index.php?uc=etatFrais&action=selectionnerMois">Mes fiches de frais</a>
+      <?php
+        //Si la personne connecté est 'admin', il peut gerer les modes de paiements
+        if ($idVisiteur == a131){
+      ?>
+      <a class="nav-link" href="index.php?uc=modePaiement&action=afficherModePaiement" title="Gérer les modes de paiements">Gérer les modes de paiements</a>
+      <?php
+      }
+      ?>
       <a class="nav-item nav-link" href="index.php?uc=connexion&action=deconnexion">Déconnexion</a>
     </div>
   </div>

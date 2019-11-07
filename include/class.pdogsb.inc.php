@@ -298,11 +298,24 @@ class PdoGsb{
 		PdoGsb::$monPdo->exec($req);
 	}
 
-	public function modePaiement(){
+	//Affiche les modes de paiement.
+	public function ModePaiement(){
 		$req = "select id as idPaiement, modePaiement as modePaiement from  ModeDePaiement";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
-	 } 
+	}
+
+	public function supprimerModePaiement($idPaiement){
+		$req = "delete from ModeDePaiement where id = $idPaiement ";
+		PdoGsb::$monPdo->exec($req);
+	}
+	
+	public function ajouterModePaiement($modePaiement){
+	$req = "insert into ModeDePaiement (modePaiement)
+	values('$modePaiement')";
+	PdoGsb::$monPdo->exec($req);
+	}
+	 
 }
 ?>
