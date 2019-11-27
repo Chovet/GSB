@@ -11,7 +11,7 @@
         ?>
 
         <ul class="list-group"><?php
-        echo "<th><li class='list-group-item'><h4><div class='d-flex justify-content-left'><option value='$idPaiement'>" . $libelle . "</div></option></h4></li>";
+        echo "<li class='list-group-item'><option value='$idPaiement'>" . $libelle . "</option></li>";
 
         ?>
 
@@ -29,12 +29,11 @@
 
 <!--Menu pour ajouter un mode de paiement-->
 <div class="container">
-    <div class="jumbotron">
-        <div class="container">
-<div class='d-flex justify-content-center'>
+  <div class="jumbotron">
+    <div class='d-flex justify-content-center'>
        <h2>Ajouter un nouveau mode de paiement</h2>
-     </div>
-       <form action="index.php?uc=modePaiement&action=ajouterModePaiement" method="post">
+    </div>
+      <form action="index.php?uc=modePaiement&action=ajouterModePaiement" method="post">
        <div class="form-group">
          <div class='d-flex justify-content-center'>
            <label for="txtPaiementHF"><h5>Nom du mode de paiement :</h5></label>
@@ -44,7 +43,7 @@
            <button class="btn btn-outline-primary" id="ajouter" type="submit" value="Ajouter">Ajouter</button>
          </div>
        </div>
-        </form>
+      </form>
 
 
 

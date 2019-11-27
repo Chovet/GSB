@@ -7,40 +7,46 @@
         <th scope="col">Libellé</th>
         <th scope="col">Montant</th>
         <th scope="col">Paiement</th>
+        <th scope="col"></th>
+
       </tr>
     </thead>
     <tbody>
 
-    <?php    
-        foreach( $lesFraisHorsForfait as $unFraisHorsForfait) {
-        $libelle = $unFraisHorsForfait['libelle'];
-        $date = $unFraisHorsForfait['date'];
-        $montant=$unFraisHorsForfait['montant'];
-        $idpaiement=$unFraisHorsForfait['idpaiement'];
-        $id = $unFraisHorsForfait['id'];
-    ?>		
-    <tr>
-      <td> <?php echo $date ?></td>
-      <td><?php echo $libelle ?></td>
-      <td><?php echo $montant ?></td>
-      <td>
-        <?php
-          if ($idpaiement == 3){
-              echo "Carte Bancaire";
-          } elseif ($idpaiement = 2){
-              echo "Espèces";
-          } else {
-              echo "Chèque";
-          }
-        ?>
-      </td>
-      <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
-        onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a>
-      </td>
-      </tr>
-    <?php		      
-    }
-    ?>
+    <?php
+    foreach( $lesFraisHorsForfait as $unFraisHorsForfait)
+    {
+      $idpaiement = $unFraisHorsForfait['idpaiement'];
+
+      foreach($lesModesDePaiements as $unModeDePaiement){
+        if($unModeDePaiement['idPaiement'] == $idpaiement){
+          $libellePaiement = $unModeDePaiement['modePaiement'];
+        }elseif ($unModeDePaiement['idPaiement'] == NULL) {
+          echo "";
+        }
+      }
+
+      $libelle = $unFraisHorsForfait['libelle'];
+      $date = $unFraisHorsForfait['date'];
+      $montant = $unFraisHorsForfait['montant'];
+      $id = $unFraisHorsForfait['id'];
+      ?>
+        <tr>
+          <!--Affiche les valeurs sous le tableau créé plus haut -->
+            <td> <?php echo $date; ?></td>
+            <td><?php echo $libelle; ?></td>
+            <td><?php echo $montant; ?> €</td>
+            <td>
+              <?php
+                echo "<option value='$iPaiement'>" . $libellePaiement . "</option>";
+              ?>
+            </td>
+            <td style="float:right;"><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>"
+              onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
+        </tr>
+            <?php
+            }
+            ?>
     </tbody>
   </table>	  
 </div>

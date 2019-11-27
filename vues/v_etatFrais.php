@@ -1,7 +1,29 @@
-﻿<div class="container">
-  <h3>Fiche de frais du mois <?php echo $numMois."-".$numAnnee?> : </h3>
+﻿<?php
+  $mouths = array(
+    '01' => 'janvier',
+    '02' => 'fevrier',
+    '03' => 'mars',
+    '04' => 'avril',
+    '05' => 'mai',
+    '06' => 'juin',
+    '07' => 'juillet',
+    '08' => 'aout',
+    '09' => 'septembre',
+    '10' => 'octobre',
+    '11' => 'novembre',
+    '12' => 'decembre',
+  );
+?>
+  <h3>Fiche de frais du mois
+  <?php
+    foreach ($lesMois as $unMois) {
+      $mois = $unMois['mois'];
+    }
+    echo $mouths[$mois].' '.$numAnnee;
+  ?>
+  </h3>
   Etat : <?php echo $libEtat?> depuis le <?php echo $dateModif?> <br> Montant validé : <?php echo $montantValide?>
-
+  
   <h4>Eléments forfaitisés</h4>
   <table class="table table-striped">
     <tr>
@@ -27,9 +49,7 @@
         ?>
     </tr>
   </table>
-</div>
 
-<div class="container" style="margin-top: 2em;">
   <h4>Descriptif des éléments hors forfait</h4>
   <table class="table table-striped">
     <thead>
@@ -38,6 +58,7 @@
         <th scope="col">Libellé</th>
         <th scope="col">Montant</th>
         <th scope="col">Paiement</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -74,7 +95,6 @@
     ?>	  
     </tbody>
   </table>
-</div>
 
 
 
